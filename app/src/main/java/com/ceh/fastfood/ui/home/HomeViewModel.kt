@@ -48,7 +48,7 @@ class HomeViewModel : ViewModel() {
                     loading.value = false
                     var resultList = Menu(
                         response?.body()?.menus?: emptyList())
-                    /*Log.d("Menu List", resultList.toString())*/
+                    Log.d("Menu List", resultList.toString())
                     menuResults.value = resultList
                 }
             }
@@ -60,8 +60,8 @@ class HomeViewModel : ViewModel() {
         val call = allAPI.getCategoryResult()
         call.enqueue(object :Callback<Category>{
             override fun onFailure(call: Call<Category>, t: Throwable) {
-                loading.value = false
-                menusLoadError.value = true
+                categoryloading.value = false
+                categoryLoadError.value = true
                 /*Log.d("CategoryError", t.toString())*/
             }
 

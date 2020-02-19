@@ -9,11 +9,15 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_category">Category</string>
-    <string name="menu_food">Food</string>
-    <string name="menu_tools">Tools</string>
+    <string name="menu_about_us">About Us</string>
+    <string name="menu_contact_us">Contact Us</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="what_is_about_us_answer">We are the premier online food ordering and delivery service in Yangon. Our website YangonD2D.com hosts menus from a broad range of Yangon restaurants. Customers may view menus and place orders for delivery to home or office via the website. Yangon Door2Door relays the orders to the appropriate restaurant, picks up the completed order from the restaurant, and delivers the items to the customer. Our website also allows customers to schedule a pickup for their orders from restaurants. Yangon Door2Door is very convenient both for businesses as well as individuals wanting to order food for delivery to their homes. Our service is available 12 hours a day / 7 days a week.</string>
+    <string name="how_do_we_deliver_answer">Delivery will be predominantly through bicycles, ensuring a greener, faster and more efficient delivery service. We may also deliver by cars on an as-needed basis for larger orders or specialty items. We use heat insulated bags with thermal hot/cold packs, ensuring that food is delivered warm or chilled, as needed.</string>
+    <string name="who_are_the_delivery_carriers_answer">Uniformed and badged Yangon Door2Door carriers must pass a two week training program, meaning you can expect the highest level of service and professionalism from our team. All of our carriers must pass a pre-employment medical check and regular health checks for hygienic handling of food products. Our employees are treated fairly and respectfully. Yangon Door2Door provides competitive market salaries, eight hour shifts and breaks.</string>
+    <string name="our_values_answer">We provide opportunities for smaller restaurants and social businesses to partner with us by giving them an opportunity to showcase their menus and increase their sales through waiving listing fees.</string>
 </resources>

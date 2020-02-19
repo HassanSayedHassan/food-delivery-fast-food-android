@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class AllAPI {
     private val apiInterface:APIInterface
     companion object{
-        const val BASE_URL = "http://food-delivery-shwe-sin-soe.khaingthinkyi.me/api/setup/"
+        const val BASE_URL = "http://food-delivery.minpike.me/api/setup/"
     }
     init {
         var retrofit = Retrofit.Builder()
@@ -26,5 +26,8 @@ class AllAPI {
     }
     fun getMenuByCategoryResult(category_id:String):Call<Menu>{
         return apiInterface.getMenuByCategories(category_id)
+    }
+    fun getMenuByRestaurantResult(restaurant_id:String):Call<Menu>{
+        return apiInterface.getMenuByRestaurants(restaurant_id)
     }
 }

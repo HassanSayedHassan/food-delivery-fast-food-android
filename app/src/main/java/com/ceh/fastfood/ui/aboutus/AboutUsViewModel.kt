@@ -1,13 +1,13 @@
-package com.ceh.fastfood.ui.share
+package com.ceh.fastfood.ui.aboutus
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ShareViewModel : ViewModel() {
+class AboutUsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is share Fragment"
+        value = "This is send Fragment"
     }
     val text: LiveData<String> = _text
 }

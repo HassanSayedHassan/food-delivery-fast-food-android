@@ -59,4 +59,6 @@ dependencies {
         exclude module: 'appcompat-v7'
         exclude module: 'support-v4'
     }
+
+    implementation 'io.paperdb:paperdb:2.6'
 }

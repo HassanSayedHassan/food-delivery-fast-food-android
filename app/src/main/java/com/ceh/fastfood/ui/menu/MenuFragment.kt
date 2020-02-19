@@ -79,20 +79,15 @@ class MenuFragment : Fragment() {
 
     }
     override fun onResume() {
-
         var categoryID: String
         super.onResume()
-        menuViewModel.categoryID.observe(
+        /*menuViewModel.categoryID.observe(
             this, Observer<String> { category ->
                 categoryID = category
-
                 Log.d("CategoryIDsss", categoryID)
                 menuViewModel.loadResults("1")
-
-
             }
-        )
+        )*/
       menuViewModel.loadResults("1")
-
     }
 }

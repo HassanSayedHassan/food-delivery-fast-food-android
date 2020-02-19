@@ -46,7 +46,7 @@ class CategoryAdapter (var categoryList:List<CategoryX> = ArrayList()) : Recycle
         }
         fun bindCategory(categories: CategoryX){
             this.categoriesResult = categories
-            Picasso.get().load(categoriesResult.category_image)
+            Picasso.get().load(categoriesResult.category_photo)
                 .placeholder(R.drawable.burrito_chicken_delicious)
                 .into(view.category_image)
             view.category_name.text = categoriesResult.category_name
