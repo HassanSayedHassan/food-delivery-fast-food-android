@@ -1,19 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_share"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:layout_margin="15dp">
+
+        <View
+            android:id="@+id/horizontal_divider_one"
+            android:layout_width="98dp"
+            android:layout_height="1dp"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            android:background="@color/colorPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/about_us"
+            app:layout_constraintBottom_toTopOf="@id/about_image"/>
+
+        <TextView
+            android:id="@+id/about_us"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact Us"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22dp"
+            app:layout_constraintLeft_toRightOf="@id/horizontal_divider_one"
+            app:layout_constraintRight_toLeftOf="@id/horizontal_divider_two" />
+
+        <View
+            android:id="@+id/horizontal_divider_two"
+            android:layout_width="98dp"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintLeft_toRightOf="@id/about_us"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/about_image"/>
+
+        <ImageView
+            android:id="@+id/about_image"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:src="@drawable/fast_food_image"
+            app:layout_constraintTop_toBottomOf="@id/about_us" />
+
+        <View
+            android:id="@+id/horizontal_divider_three"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintTop_toBottomOf="@id/about_image" />
+
+        <TextView
+            android:id="@+id/send_me_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="If you want to tell something, send message to us."
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_three"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

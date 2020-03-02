@@ -158,6 +158,7 @@ class HomeFragment : Fragment(), MenuAdapter.ClickListener, CategoryAdapter.Clic
             this, Observer<Menu>{result ->
                 menu_recyclerview.visibility = View.VISIBLE
                 menuListAdapter.updateList(result.menus)
+                Log.d("Result Menus", result.menus.toString())
             }
         )
         homeViewModel.getError().observe(

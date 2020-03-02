@@ -37,7 +37,11 @@
         android:name="com.ceh.fastfood.ui.menu.MenuFragment"
         android:label="MenuFragment" />
     <fragment
-        android:id="@+id/toolsFragment"
-        android:name="com.ceh.fastfood.ui.tools.ToolsFragment"
-        android:label="ToolsFragment" />
+        android:id="@+id/nav_about_us"
+        android:name="com.ceh.fastfood.ui.aboutus.AboutUsFragment"
+        android:label="AboutUsFragment" />
+    <fragment
+        android:id="@+id/nav_contact_us"
+        android:name="com.ceh.fastfood.ui.contactus.ContactUsFragment"
+        android:label="ContactUsFragment" />
 </navigation>

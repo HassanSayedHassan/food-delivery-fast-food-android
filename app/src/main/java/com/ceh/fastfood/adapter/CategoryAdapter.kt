@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ceh.fastfood.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.category_item.view.*
-import kotlinx.android.synthetic.main.menu_item.view.*
 
 class CategoryAdapter (var categoryList:List<CategoryX> = ArrayList()) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 

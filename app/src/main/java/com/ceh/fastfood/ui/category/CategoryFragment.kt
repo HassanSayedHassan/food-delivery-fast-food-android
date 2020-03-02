@@ -25,8 +25,6 @@ class CategoryFragment : Fragment(), CategoryAdapter.ClickListener{
 
     private lateinit var categoryListAdapter: CategoryAdapter
     private lateinit var categoryViewModel: CategoryViewModel
-
-    private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var viewCategoryManager: RecyclerView.LayoutManager
 
     override fun onCreateView(

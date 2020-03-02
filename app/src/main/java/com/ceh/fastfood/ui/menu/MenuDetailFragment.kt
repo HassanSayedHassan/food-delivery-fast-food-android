@@ -51,6 +51,7 @@ class MenuDetailFragment :Fragment(){
                 related_menu_of_these_restaurant_name.text = menu.user_detail_id?.user?.name
                 add_to_cart_btn.setOnClickListener {
                     Toast.makeText(activity,menu.menu_name + " added to your cart", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity,menu.menu_name + " added to your cart", Toast.LENGTH_LONG).show()
                 }
             }
         )

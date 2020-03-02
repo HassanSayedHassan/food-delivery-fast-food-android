@@ -22,7 +22,7 @@ class MenuAdapter (var menusList:List<MenuX> = ArrayList()) : RecyclerView.Adapt
     }
 
     override fun getItemCount(): Int {
-        Log.d("Menu List:", menusList.size.toString())
+        //Log.d("Menu List:", menusList.size.toString())
         return menusList.size
     }
 
