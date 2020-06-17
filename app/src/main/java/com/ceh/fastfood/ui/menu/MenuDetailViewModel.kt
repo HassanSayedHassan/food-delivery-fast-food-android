@@ -28,7 +28,7 @@ class MenuDetailViewModel : ViewModel() {
         Log.d("Selected Menu", menu.toString())
     }
 
-    fun loadResults(restaurant_id:String){
+    fun loadResults(restaurant_id:Int){
         loading.value = true
         val call = allAPI.getMenuByRestaurantResult(restaurant_id)
         call.enqueue(object : Callback<Menu> {

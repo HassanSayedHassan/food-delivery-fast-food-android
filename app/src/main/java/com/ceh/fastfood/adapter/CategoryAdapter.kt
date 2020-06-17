@@ -44,10 +44,12 @@ class CategoryAdapter (var categoryList:List<CategoryX> = ArrayList()) : Recycle
             itemView.setOnClickListener(this)
         }
         fun bindCategory(categories: CategoryX){
+            var baseUrl = "http://food-delivery-api.chaneihmwe.com/"
             this.categoriesResult = categories
-            Picasso.get().load(categoriesResult.category_photo)
+            Picasso.get().load(baseUrl+categoriesResult.category_image)
                 .placeholder(R.drawable.burrito_chicken_delicious)
                 .into(view.category_image)
+            Log.d("Image", baseUrl+categoriesResult.category_image)
             view.category_name.text = categoriesResult.category_name
         }
         override fun onClick(v: View?) {

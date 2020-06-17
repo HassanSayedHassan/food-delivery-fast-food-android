@@ -1,5 +1,6 @@
 package com.ceh.fastfood.adapter
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,17 +10,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ceh.fastfood.MainActivity
 import com.ceh.fastfood.R
 import com.ceh.fastfood.ShoppingCart
-import com.ceh.fastfood.model.cart.CartItem
+import com.ceh.fastfood.model.cartMenu.CartMenu
 import com.ceh.fastfood.model.menu.MenuX
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
+import io.reactivex.Observable
+import io.reactivex.Observer
+import io.reactivex.ObservableOnSubscribe
+import kotlinx.android.synthetic.main.menu_by_category_item.*
 import kotlinx.android.synthetic.main.menu_by_category_item.view.*
-import kotlin.coroutines.coroutineContext
+import kotlin.collections.ArrayList
 
 class MenuByCategoryAdapter (var menusList:List<MenuX> = ArrayList()) : RecyclerView.Adapter<MenuByCategoryAdapter.MenuByCategoryViewHolder>() {
 
     var mClickListener: ClickListener? = null
     /*var cart: MutableList<Cart> = ArrayList()*/
+    var count = 0
     fun setOnClickListener(clickListener: ClickListener){
         this.mClickListener = clickListener
     }
@@ -48,36 +54,76 @@ class MenuByCategoryAdapter (var menusList:List<MenuX> = ArrayList()) : Recycler
         init {
             itemView.setOnClickListener(this)
         }
-        fun bindFood(menus: MenuX){
+            @SuppressLint("CheckResult")
+            fun bindFood(menus: MenuX){
+            var baseUrl = "http://food-delivery-api.chaneihmwe.com/"
             this.menusResult = menus
-            Picasso.get().load(menusResult.menu_photo)
+            Picasso.get().load(baseUrl+menusResult.menu_image)
                 .placeholder(R.drawable.burrito_chicken_delicious)
                 .into(view.menu_image_by_category)
             view.menu_id_by_category.text = menusResult.id.toString()
             view.menu_name_by_category.text = menusResult.menu_name
             view.menu_price_by_category.text = menusResult.menu_price
-            view.restaurant_name_by_category.text = menusResult.user_detail_id.user.name
-            view.restaurant_township_name.text = menusResult.user_detail_id.township.township_name
+            view.restaurant_name_by_category.text = menusResult.restaurant.user.name
+            view.restaurant_township_name.text = menusResult.restaurant.township.township_name
 
-            var cartItem: MutableList<CartItem> = ArrayList()
-            view.add_to_cart_btn_by_category.setOnClickListener{
-               // Log.d("CartItemArray", cartItem.toString())
-                Toast.makeText(view.context,menusResult.menu_name + " added to your cart", Toast.LENGTH_LONG).show()
-                var menuId:String = view.menu_id_by_category.text.toString()
-                var menuQty:Int = 1
-                var menuPrice = menusResult.menu_price.toInt()
-                var subTotal = menuPrice * menuQty
-                Log.d("subTotal", subTotal.toString())
+                Observable.create(ObservableOnSubscribe<MutableList<CartMenu>> {
 
-                /*cartItem.add(CartItem(menuId,menuQty,subTotal))
-                Log.d("CartItem", cartItem.toString())
+                /*view.btn_increase.setOnClickListener { v ->
 
+                    count += 1
+                    view.qty.text = count.toString()
+                    Log.d("Count>>>>", count.toString())
 
-                cart.add(Cart(cartItem,1,"22-1-1997",5000.toString()))
-                Log.d("Cart", cart.toString())*/
+                    val menuItem = CartMenu(menus)
+                    ShoppingCart.addMenu(menuItem)
+                    Snackbar.make(
+                        (view.context as MainActivity).menu_layout,
+                        "${menus.menu_name} added to your cart",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+
+                    it.onNext(ShoppingCart.getCart())
+                }*/
+
+                /*view.btn_decrease.setOnClickListener { v ->
+
+                    count--
+                    if (count > 0)
+                        view.qty.text = count.toString()
+                    else
+                        view.qty.text = "0"
+
+                    val menuItem = CartMenu(menus)
+                    ShoppingCart.removeMenu(menuItem, view.context)
+                    Snackbar.make(
+                        (view.context as MainActivity).menu_layout,
+                        "${menus.menu_name} removed from your cart",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+
+                    it.onNext(ShoppingCart.getCart())
+                }*/
+                view.add_to_cart_btn_by_category.setOnClickListener { v ->
+
+                    val menuItem = CartMenu(menus)
+                    ShoppingCart.addMenu(menuItem)
+                    Snackbar.make(
+                        (view.context as MainActivity).menu_layout,
+                        "${menus.menu_name} added to your cart",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+
+                    it.onNext(ShoppingCart.getCart())
+                }
+
+            }).subscribe { cart ->
+                var qty = 0
+                cart.forEach { cartMenu ->
+                    qty += cartMenu.qty
+                }
+                Toast.makeText(view.context, "Cart size ${ShoppingCart.getShoppingCartSize()}", Toast.LENGTH_LONG).show()
             }
-
-            //view.delivered_township_names.text = menusResult.townships.get(0).township_name
         }
         override fun onClick(v: View?) {
             mClickListener?.onClick(menusResult)

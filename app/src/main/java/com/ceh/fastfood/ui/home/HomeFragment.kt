@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +26,7 @@ import com.ceh.fastfood.model.category.Category
 import com.ceh.fastfood.model.category.CategoryX
 import com.ceh.fastfood.model.menu.Menu
 import com.ceh.fastfood.model.menu.MenuX
+import com.ceh.fastfood.ui.category.CategoryFragmentDirections
 import com.ceh.fastfood.ui.menu.MenuDetailViewModel
 import com.ceh.fastfood.ui.menu.MenuFragment
 import com.ceh.fastfood.ui.menu.MenuViewModel
@@ -220,32 +222,21 @@ class HomeFragment : Fragment(), MenuAdapter.ClickListener, CategoryAdapter.Clic
     }
 
     override fun onClick(menu: MenuX) {
-        if (!TextUtils.isEmpty(menu.menu_photo)) {
+        if (!TextUtils.isEmpty(menu.menu_image)) {
             val menuDetailViewModel: MenuDetailViewModel =
                 ViewModelProviders.of(activity!!).get(MenuDetailViewModel::class.java)
             menuDetailViewModel.selectedMenu(menu)
-            Toast.makeText(context, menu.menu_name, Toast.LENGTH_LONG).show()
-            view!!.findNavController().navigate(R.id.action_nav_home_to_menuDetailFragment2)
-            /*val nextFrag = MenuDetailFragment()
-            activity!!.supportFragmentManager.beginTransaction()`
-                .replace(R.id.screen_container, nextFrag, "findThisFragment")
-                .addToBackStack(null)
-                .commit()*/
+            var restaurantID = menu.restaurant.id
+            var action = HomeFragmentDirections.actionNavHomeToMenuDetailFragment2(restaurantID)
+            findNavController().navigate(action)
         }
     }
 
     override fun onClick(categories: CategoryX) {
         if (!TextUtils.isEmpty(categories.id.toString())) {
-            val menuViewModel: MenuViewModel =
-                ViewModelProviders.of(this).get(MenuViewModel::class.java)
-            menuViewModel.loadResults(categories.id.toString())
-            //Toast.makeText(context, categories.id, Toast.LENGTH_LONG).show()
-            view!!.findNavController().navigate(R.id.action_nav_home_to_menuFragment)
-            /*val nextFrag = MenuDetailFragment()
-            activity!!.supportFragmentManager.beginTransaction()
-                .replace(R.id.screen_container, nextFrag, "findThisFragment")
-                .addToBackStack(null)
-                .commit()*/
+            var categoryID = categories.id
+            var action = HomeFragmentDirections.actionNavHomeToMenuFragment(categoryID)
+            findNavController().navigate(action)
         }
     }
 }

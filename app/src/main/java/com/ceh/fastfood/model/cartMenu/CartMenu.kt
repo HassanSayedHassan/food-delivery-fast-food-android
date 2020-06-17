@@ -1,8 +1,8 @@
-package com.ceh.fastfood.model.cart
+package com.ceh.fastfood.model.cartMenu
 
 import com.ceh.fastfood.model.menu.MenuX
 
-data class CartItem(
+data class CartMenu(
     val menu: MenuX,
     var qty:Int = 0
 )

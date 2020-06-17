@@ -1,6 +1,6 @@
 package com.ceh.fastfood.model.menu
 
-data class UserDetailId(
+data class Restaurant(
     val address: String,
     val created_at: String,
     val date_of_birth: Any,

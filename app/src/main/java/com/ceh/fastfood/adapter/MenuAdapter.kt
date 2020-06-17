@@ -42,8 +42,9 @@ class MenuAdapter (var menusList:List<MenuX> = ArrayList()) : RecyclerView.Adapt
             itemView.setOnClickListener(this)
         }
         fun bindFood(menus: MenuX){
+            var baseUrl = "http://food-delivery-api.chaneihmwe.com/"
             this.menusResult = menus
-            Picasso.get().load(menusResult.menu_photo)
+            Picasso.get().load(baseUrl+menusResult.menu_image)
                 .placeholder(R.drawable.burrito_chicken_delicious)
                 .into(view.menu_image)
             view.menu_name.text = menusResult.menu_name

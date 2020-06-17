@@ -1,56 +1,67 @@
 package com.ceh.fastfood
 
 import android.content.Context
-import com.ceh.fastfood.model.cart.CartItem
+import android.widget.Toast
+import com.ceh.fastfood.model.cartMenu.CartMenu
 import io.paperdb.Paper
 
 class ShoppingCart {
-
     companion object {
-        fun addItem(cartItem: CartItem) {
-            val cart = getCart()
 
-            val targetItem = cart.singleOrNull { it.menu.id == cartItem.menu.id }
-            if (targetItem == null) {
-                cartItem.qty++
-                cart.add(cartItem)
+        fun addMenu(cartMenu: CartMenu) {
+            val cart = ShoppingCart.getCart()
+            val targetMenu = cart.singleOrNull { it.menu.id == cartMenu.menu.id }
+            if (targetMenu == null) {
+                cartMenu.qty++
+                cart.add(cartMenu)
             } else {
-                targetItem.qty++
+                targetMenu.qty++
             }
-            saveCart(cart)
+            ShoppingCart.saveCart(cart)
         }
 
-        fun removeItem(cartItem: CartItem, context: Context) {
-            val cart = getCart()
+        fun getAmount(cardMenu: List<CartMenu>): Double {
+            var totalAmount = 0.0
+            getCart().forEach {
+                totalAmount += it.menu.menu_price.toDouble() * it.qty
 
-            val targetItem = cart.singleOrNull { it.menu.id == cartItem.menu.id }
-            if (targetItem != null) {
-                if (targetItem.qty > 0) {
-                    targetItem.qty--
+
+            }
+            return totalAmount
+        }
+
+        fun removeMenu(cartMenu: CartMenu, context: Context) {
+            val cart = ShoppingCart.getCart()
+            val targetMenu = cart.singleOrNull { it.menu.id == cartMenu.menu.id }
+            if (targetMenu != null) {
+                if (targetMenu.qty > 0) {
+                    Toast.makeText(context, "Great quantity", Toast.LENGTH_LONG).show()
+                    targetMenu.qty--
                 } else {
-                    cart.remove(targetItem)
+                    cart.remove(targetMenu)
                 }
             }
-
-            saveCart(cart)
+            ShoppingCart.saveCart(cart)
         }
 
-        fun saveCart(cart: MutableList<CartItem>) {
+        fun saveCart(cart: MutableList<CartMenu>) {
             Paper.book().write("cart", cart)
         }
 
-        fun getCart(): MutableList<CartItem> {
+        fun getCart(): MutableList<CartMenu> {
             return Paper.book().read("cart", mutableListOf())
         }
 
         fun getShoppingCartSize(): Int {
             var cartSize = 0
-            getCart().forEach {
+            ShoppingCart.getCart().forEach {
                 cartSize += it.qty
             }
-
             return cartSize
         }
-    }
 
+        fun deleteShoppingCart() {
+            Paper.book().delete("cart")
+        }
+    }
 }

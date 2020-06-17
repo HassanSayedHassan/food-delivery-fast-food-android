@@ -15,9 +15,9 @@ interface APIInterface {
     fun getCategories():Call<Category>
 
     @GET("menu_by_category")
-    fun getMenuByCategories(@Query("category_id") category_id:String):Call<Menu>
+    fun getMenuByCategories(@Query("category_id") category_id:Int):Call<Menu>
 
     @GET("menus_by_restaurant")
-    fun getMenuByRestaurants(@Query("restaurant_id") restaurant_id:String):Call<Menu>
+    fun getMenuByRestaurants(@Query("restaurant_id") restaurant_id:Int):Call<Menu>
 
 }

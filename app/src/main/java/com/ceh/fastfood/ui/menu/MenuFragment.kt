@@ -43,11 +43,14 @@ class MenuFragment : Fragment() {
         menuByCategoryListAdapter = MenuByCategoryAdapter()
         menu_by_category_recyclerview.adapter = menuByCategoryListAdapter
         menu_by_category_recyclerview.layoutManager = viewManager
-        observeMenuByCategoryViewModel()
+        var messageArgs = arguments?.let { MenuFragmentArgs.fromBundle(it) }
+        var categoryID = messageArgs?.categoryID
+        observeMenuByCategoryViewModel(categoryID!!)
     }
-    fun observeMenuByCategoryViewModel(){
+    fun observeMenuByCategoryViewModel(categoryID:Int){
         menuViewModel = ViewModelProviders.of(this)
             .get(MenuViewModel::class.java)
+        menuViewModel.loadResults(categoryID)
         menuViewModel.getResults().observe(
             this, Observer<Menu>{ result ->
                 menu_by_category_recyclerview.visibility = View.VISIBLE
@@ -79,15 +82,9 @@ class MenuFragment : Fragment() {
 
     }
     override fun onResume() {
-        var categoryID: String
         super.onResume()
-        /*menuViewModel.categoryID.observe(
-            this, Observer<String> { category ->
-                categoryID = category
-                Log.d("CategoryIDsss", categoryID)
-                menuViewModel.loadResults("1")
-            }
-        )*/
-      menuViewModel.loadResults("1")
+        var messageArgs = arguments?.let { MenuFragmentArgs.fromBundle(it) }
+        var categoryID = messageArgs?.categoryID
+      menuViewModel.loadResults(categoryID!!)
     }
 }

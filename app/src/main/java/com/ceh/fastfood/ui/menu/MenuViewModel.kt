@@ -18,15 +18,15 @@ class MenuViewModel : ViewModel() {
     var menusLoadError:MutableLiveData<Boolean> = MutableLiveData()
     var loading: MutableLiveData<Boolean> = MutableLiveData()
 
-    var categoryID: MutableLiveData<String> = MutableLiveData()
+    var categoryID: MutableLiveData<Int> = MutableLiveData()
 
     fun getResults(): LiveData<Menu> = menuResults
     fun  getError(): LiveData<Boolean> = menusLoadError
     fun getLoading(): LiveData<Boolean> = loading
 
-    fun getCategoryID(): LiveData<String> = categoryID
+    fun getCategoryID(): LiveData<Int> = categoryID
 
-    fun loadResults(category_id:String){
+    fun loadResults(category_id:Int){
         categoryID.value = category_id
         //Log.d("CategoryID", categoryID.value)
         loading.value = true
