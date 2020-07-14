@@ -1,20 +1,22 @@
 package com.ceh.fastfood
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.navigation.NavigationView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import android.view.Menu
 import com.ceh.fastfood.adapter.SliderImageModel
-import com.ceh.fastfood.ui.home.HomeFragment
+import com.ceh.fastfood.ui.viewcart.ViewCartFragment
+import com.google.android.material.navigation.NavigationView
+import io.paperdb.Paper
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private var imageModelArrayList: ArrayList<SliderImageModel>? = null
 
     private val myImageList = intArrayOf(R.drawable.cooked_seafoods, R.drawable.beef_steak_with_sauce, R.drawable.burrito_chicken_delicious)
+    var cart_count = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,7 +79,24 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
+        Paper.init(baseContext)
         menuInflater.inflate(R.menu.main, menu)
+        val menuItem = menu.findItem(R.id.view_cart)
+        menuItem.setIcon(
+            Converter.convertLayoutToImage(
+                this@MainActivity,
+                ShoppingCart.getShoppingCartSize(),
+                R.drawable.ic_shopping_cart_white
+            )
+        )
+        Log.d("Count", ShoppingCart.getShoppingCartSize().toString())
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.view_cart) {
+            supportFragmentManager.beginTransaction().replace(R.id.screen_container, ViewCartFragment()).commit()
+        }
         return true
     }
 

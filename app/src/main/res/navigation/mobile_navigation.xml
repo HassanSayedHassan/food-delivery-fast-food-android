@@ -58,5 +58,17 @@
     <fragment
         android:id="@+id/viewCartFragment"
         android:name="com.ceh.fastfood.ui.viewcart.ViewCartFragment"
-        android:label="ViewCartFragment" />
+        android:label="ViewCartFragment" >
+        <action
+            android:id="@+id/action_viewCartFragment_to_customerInfoFragment"
+            app:destination="@id/customerInfoFragment" />
+        <action
+            android:id="@+id/action_viewCartFragment_to_nav_category"
+            app:destination="@id/nav_category" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerInfoFragment"
+        android:name="com.ceh.fastfood.ui.CustomerInfoFragment"
+        android:label="fragment_customer_info"
+        tools:layout="@layout/fragment_customer_info" />
 </navigation>

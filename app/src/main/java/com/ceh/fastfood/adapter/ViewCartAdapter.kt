@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ceh.fastfood.R
 import com.ceh.fastfood.model.cartMenu.CartMenu
+import com.ceh.fastfood.model.category.CategoryX
 import com.ceh.fastfood.model.menu.Menu
+import com.ceh.fastfood.model.order.OrderDetailCart
 import kotlinx.android.synthetic.main.view_cart.view.*
 
 class ViewCartAdapter(var context: Context, var cartMenu: List<CartMenu>)
@@ -24,6 +26,11 @@ class ViewCartAdapter(var context: Context, var cartMenu: List<CartMenu>)
 
     override fun onBindViewHolder(holder: ViewCartViewHolder, position: Int) {
         holder.bindMenuCartList(cartMenu[position])
+    }
+
+    fun updateList(cart:List<CartMenu>){
+        this.cartMenu = cart
+        notifyDataSetChanged()
     }
 
     class ViewCartViewHolder(view: View): RecyclerView.ViewHolder(view){

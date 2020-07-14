@@ -1,28 +1,23 @@
 package com.ceh.fastfood.ui.menu
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ceh.fastfood.R
-import com.ceh.fastfood.adapter.MenuAdapter
 import com.ceh.fastfood.adapter.MenuByCategoryAdapter
 import com.ceh.fastfood.model.menu.Menu
-import com.ceh.fastfood.model.menu.MenuX
-import com.squareup.picasso.Picasso
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.fragment_menu_detail.*
-import kotlinx.android.synthetic.main.fragment_menu_detail.view.*
+
 
 class MenuDetailFragment :Fragment(){
     private lateinit var menuByCategoryListAdapter: MenuByCategoryAdapter
@@ -36,10 +31,10 @@ class MenuDetailFragment :Fragment(){
         Paper.init(context)
         (activity as AppCompatActivity).supportActionBar?.title = "Menu's Detail"
         var root = inflater.inflate(R.layout .fragment_menu_detail, container, false)
-        var viewCart = root.findViewById<Button>(R.id.view_cart)
+        /*var viewCart = root.findViewById<Button>(R.id.view_cart)
         viewCart.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_menuDetailFragment2_to_viewCartFragment)
-        }
+        }*/
         return root
     }
 
@@ -48,7 +43,7 @@ class MenuDetailFragment :Fragment(){
         val menuDetailViewModel:MenuDetailViewModel = ViewModelProviders.of(activity!!).get(MenuDetailViewModel::class.java)
         Log.d("Menu Detail", menuDetailViewModel.getSelectedMenu().toString())
         var baseUrl = "http://food-delivery-api.chaneihmwe.com/"
-        menuDetailViewModel.getSelectedMenu().observe(
+        /*menuDetailViewModel.getSelectedMenu().observe(
             viewLifecycleOwner, Observer<MenuX>{ menu ->
                 Log.d("Detail Name", "Name")
                 Picasso.get().load(baseUrl+menu.menu_image)
@@ -64,7 +59,7 @@ class MenuDetailFragment :Fragment(){
                     Toast.makeText(activity,menu.menu_name + " added to your cart", Toast.LENGTH_LONG).show()
                 }
             }
-        )
+        )*/
         viewManager = LinearLayoutManager(activity)
         menuByCategoryListAdapter = MenuByCategoryAdapter()
         menu_by_restaurant_recyclerview.adapter = menuByCategoryListAdapter
@@ -81,6 +76,7 @@ class MenuDetailFragment :Fragment(){
         menuDetailViewModel.getResults().observe(
             this, Observer<Menu>{ result ->
                 menu_by_restaurant_recyclerview.visibility = View.VISIBLE
+                Log.d("MenuDetail", result.menus.toString())
                 menuByCategoryListAdapter.updateList(result.menus)
             }
         )
@@ -111,4 +107,7 @@ class MenuDetailFragment :Fragment(){
         var restaurantID = messageArgs?.restaurantID
         menuDetailViewModel.loadResults(restaurantID!!)
     }
+
+
+
 }

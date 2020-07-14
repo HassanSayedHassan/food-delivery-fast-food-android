@@ -2,21 +2,15 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    >
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/view_cart"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/ic_shopping_cart"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <!--<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/detail_cardView"
         android:layout_width="match_parent"
@@ -136,7 +130,7 @@
                 app:layout_constraintBaseline_toBaselineOf="@id/menu_detail_price"
                 app:layout_constraintLeft_toRightOf="@id/menu_detail_price" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>-->
 
     <TextView
         android:id="@+id/txt_error_menu_by_category"
@@ -168,7 +162,7 @@
         android:text="Related Menus of this "
         android:textColor="@color/colorPrimary"
         android:textSize="21dp"
-        app:layout_constraintTop_toBottomOf="@id/detail_cardView"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
     <TextView
         android:id="@+id/related_menu_of_these_restaurant_name"
